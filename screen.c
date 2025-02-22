@@ -11,14 +11,12 @@ void set_bounds(s_Screen *scr) {
 
 void draw_text_space(s_Screen *scr) {
 	for (int i=0;i<scr->screen_rows-1;i++) {
-		move(i,0);
-		wprintw(stdscr,"~");
+		mvwprintw(stdscr, i, 0, "~");
 	}
 }
 
 void draw_statusline(s_Screen *scr, e_Modes mode) {
 	char *status_name;
-	attron(A_STANDOUT);
 	if (mode == MODE_COMMAND) {
 		status_name = "Command";
 	} else if (mode == MODE_INSERT) {
@@ -26,8 +24,8 @@ void draw_statusline(s_Screen *scr, e_Modes mode) {
 	} else {
 		status_name = "Normal";
 	}
-	move(scr->screen_rows-1,0);
-	wprintw(stdscr,"%s",status_name);
+	attron(A_STANDOUT);
+	mvwprintw(stdscr, scr->screen_rows-1, 0, "%s", status_name);
 	attroff(A_STANDOUT);
 }
 
