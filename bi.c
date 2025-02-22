@@ -14,9 +14,9 @@ int main() {
 	keypad(stdscr, TRUE);
 	s_Screen scr;
 	set_bounds(&scr);
-	
+	// nodelay(stdscr,TRUE);	
+	e_Modes mode = MODE_NORMAL;
 	while (1) {
-		e_Modes mode = MODE_NORMAL;
 		refresh_screen(&scr, mode);
 		int k = getch();
 		switch (mode) {
