@@ -23,6 +23,7 @@ int main() {
 			case MODE_NORMAL: 
 				if (k == 'i') {
 					mode = MODE_INSERT;
+					curs_set(1);
 				} else if (k == ':') {
 					mode = MODE_COMMAND;
 				} else if (k == 'q') {
@@ -32,6 +33,7 @@ int main() {
 			case MODE_INSERT:
 				if (k == 27) {
 					mode = MODE_NORMAL;
+					curs_set(0);
 				}
 				break;
 			case MODE_COMMAND:
