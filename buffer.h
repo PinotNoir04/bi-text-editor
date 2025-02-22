@@ -1,3 +1,4 @@
+#pragma once
 #ifndef BUFFER_H
 #define BUFFER_H
 
@@ -11,10 +12,11 @@ typedef struct{
 	char *c_end;
 }t_buffer;
 
-t_buffer *buffer_init(size_t size);
+t_buffer *buffer_init();
 void buffer_resize(t_buffer* buf);
 void insert_char(t_buffer* buf, char *text);
 void delete_char(t_buffer* buf);
+void delete_buffer(t_buffer* buf);
 void move_left(t_buffer* buf);
 void move_right(t_buffer* buf);
 

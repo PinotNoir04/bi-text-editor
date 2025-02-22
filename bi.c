@@ -1,9 +1,7 @@
 #include <ncurses.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <curses.h>
-#include "modes.h"
-#include "screen.h"
+#include "editor.h"
 
 int main() {
 
@@ -12,33 +10,32 @@ int main() {
 	raw();
 	noecho();
 	keypad(stdscr, TRUE);
-	s_Screen scr;
-	set_bounds(&scr);
+	s_Editor ed;
+	init_editor(&ed);
 	// nodelay(stdscr,TRUE);	
-	e_Modes mode = MODE_NORMAL;
 	while (1) {
-		refresh_screen(&scr, mode);
+		refresh_editor(&ed);
 		int k = getch();
-		switch (mode) {
+		switch (ed.mode) {
 			case MODE_NORMAL: 
 				if (k == 'i') {
-					mode = MODE_INSERT;
+					ed.mode = MODE_INSERT;
 					curs_set(1);
 				} else if (k == ':') {
-					mode = MODE_COMMAND;
+					ed.mode = MODE_COMMAND;
 				} else if (k == 'q') {
 					exit(0);
 				}
 				break;
 			case MODE_INSERT:
 				if (k == 27) {
-					mode = MODE_NORMAL;
+					ed.mode = MODE_NORMAL;
 					curs_set(0);
 				}
 				break;
 			case MODE_COMMAND:
 				if (k == 27) {
-					mode = MODE_NORMAL;
+					ed.mode = MODE_NORMAL;
 				}
 				break;
 		}

@@ -1,4 +1,7 @@
 CFLAGS = -Wall -Wextra -pedantic -lcurses
 
-bi: bi.c screen.c screen.h modes.h
-	gcc bi.c screen.c -o bi $(CFLAGS)
+CFILES = bi.c editor.c buffer.c
+HFILES = editor.h buffer.h modes.h
+
+bi: $(CFILES) $(HFILES)
+	gcc $(CFILES) -o bi $(CFLAGS)
