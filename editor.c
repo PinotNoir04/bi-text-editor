@@ -1,4 +1,3 @@
-#include <ncurses.h>
 #include <unistd.h>
 #include <curses.h>
 #include "editor.h"
@@ -8,13 +7,18 @@
 void init_editor(s_Editor *ed) {
 	getmaxyx(stdscr, ed->rows, ed->cols);
 	ed->mode = MODE_NORMAL;
-	ed->buf = buffer_init();
+	ed->buf_arr = buffer_init();
 }
 
 
 void draw_text_space(s_Editor *ed) {
-	for (int i=0;i<ed->rows-1;i++) {
-		mvwprintw(stdscr, i, 0, "~");
+	int row=0, pos=0;
+	for (size_t i=0; i<ed->buf_arr->c_start; i++) {
+		mvaddch(row, pos, ed->buf_arr->arr[i]);
+		pos++;
+	}
+	for (size_t i=ed->buf_arr->c_end; i<ed->buf_arr->capacity; i++) {
+		mvaddch(row, pos, ed->buf_arr->arr[i]);
 	}
 }
 

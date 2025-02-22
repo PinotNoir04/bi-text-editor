@@ -9,7 +9,8 @@ typedef struct{
 	int rows;
 	int cols;
 	e_Modes mode;
-	t_buffer* buf;
+	t_buffer *buf_arr;
+	
 }s_Editor;
 
 void init_editor(s_Editor *ed);

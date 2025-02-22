@@ -4,17 +4,18 @@
 
 #include <stddef.h>
 
+#define INITIAL_BUFFER_CAPACITY 100
+
 typedef struct{
 	size_t capacity;
-	size_t gap_size;
+	size_t c_start;
+	size_t c_end;
 	char *arr;
-	char *c_start;
-	char *c_end;
 }t_buffer;
 
 t_buffer *buffer_init();
 void buffer_resize(t_buffer* buf);
-void insert_char(t_buffer* buf, char *text);
+void insert_char(t_buffer* buf, char text);
 void delete_char(t_buffer* buf);
 void delete_buffer(t_buffer* buf);
 void move_left(t_buffer* buf);
